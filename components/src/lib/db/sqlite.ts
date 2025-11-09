@@ -22,7 +22,7 @@ function scheduleSave() {
 }
 
 async function readSchemaText(): Promise<string> {
-  const res = await fetch("/components/databases/schema.sqlite.sql"); // served statically
+  const res = await fetch("/databases/schema.sqlite.sql"); // served statically
   return await res.text();
 }
 
@@ -31,7 +31,10 @@ export async function initDatabase(): Promise<void> {
     return;
   }
   if (!SQL) {
-    SQL = await initSqlJs({ locateFile: (f) => `/${f}` });
+    SQL = await initSqlJs({
+      locateFile: (f) =>
+        `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/${f}`,
+    });
   }
 
   const existing = await loadBytes();
@@ -88,6 +91,7 @@ export function all<T = any>(
 ): T[] {
   const d = getDB();
   const stmt = d.prepare(sql);
+  stmt.bind(params);
   const rows: T[] = [];
   while (stmt.step()) {
     const row = stmt.getAsObject() as T;

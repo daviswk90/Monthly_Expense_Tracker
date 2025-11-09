@@ -1,4 +1,3 @@
-// components/src/providers/DatabaseProvider.tsx
 import React from "react";
 import { initDatabase } from "../lib/db/sqlite";
 import * as Categories from "../lib/data/categories";
