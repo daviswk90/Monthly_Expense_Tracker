@@ -22,7 +22,7 @@ export function Navigation () {
                 {' | '}
                 <NavLink to="/budget">Budget</NavLink>
                 {' | '}
-                <NavLink to="/">Create</NavLink>
+                <NavLink to="/create">Create</NavLink>
 
                 {/**Calling both settings and name to be loaded */}
                 {settings && settings.name && (

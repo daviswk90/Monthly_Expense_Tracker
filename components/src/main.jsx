@@ -9,6 +9,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { MonthlyPlans } from "./pages/MonthlyPlans";
 import { DailyPlans } from "./pages/DailyPlans";
 import { BudgetPage } from "./pages/BudgetPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import "/styles.css";
 
 const router = createBrowserRouter([
     {
@@ -41,9 +43,18 @@ const router = createBrowserRouter([
             }
 
         ]
-        
-
-}])
+    },
+    {   path: "/plans", 
+            element: <PlanPage/>,
+            children: [
+                {path: "/plans/monthly", element: <MonthlyPlans/>},
+                {path: "/plans/daily", element: <DailyPlans/>}
+            ]
+    },
+    {path: "/transactions", element: (<ProtectedRoute><TransactionsPage/></ProtectedRoute>)},
+    {path: "/budget", element: (<ProtectedRoute><BudgetPage/></ProtectedRoute>)},
+    {path: "*", element: <NotFoundPage/>},
+])
 
 const root = createRoot(document.getElementById("root")).render(
     <StrictMode>
