@@ -11,6 +11,7 @@ import { DailyPlans } from "./pages/DailyPlans";
 import { BudgetPage } from "./pages/BudgetPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import "/styles.css";
+import DatabaseProvider from "./providers/DatabaseProvider";
 
 const router = createBrowserRouter([
     {
@@ -27,20 +28,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/transactions", 
-                element: (
-                <ProtectedRoute>
-                    <TransactionsPage/>
-                </ProtectedRoute>
-                ),
+                element: <DatabaseProvider><TransactionsPage/></DatabaseProvider>
             },
             {
                 path: "/budget",
-                element: (
-                    <ProtectedRoute>
-                        <BudgetPage/>
-                    </ProtectedRoute>
-                )
-            }
+                element: <BudgetPage/>}
 
         ]
     },
